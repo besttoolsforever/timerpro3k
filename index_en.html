@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIMER PRO 3000</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('assets/others/chefe3000.webp') no-repeat center center / cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+        }
+        .content {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px 2px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            margin: 20px;
+            position: relative;
+        }
+        h1 {
+            color: #ffd700;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .timer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .timer {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .timer-input {
+            margin: 5px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 110px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .timer-button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #398be5;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.1s ease;
+            margin: 5px;
+        }
+        .timer-button:hover {
+            background-color: #11b5db;
+        }
+        .timer-button:active {
+            background-color: #ff6b6b;
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+        .sound-control {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .sound-control > * {
+            margin-bottom: 10px;
+        }
+        .sound-icon {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            padding: 5px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .sound-enabled {
+            background-color: #8bc34a;
+            border-color: #4CAF50;
+        }
+        .sound-disabled {
+            background-color: #f44336;
+            border-color: #f44336;
+        }
+        .clear-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #000000;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            padding: 3px;
+            transition: background-color 0.3s ease, box-shadow 0.1s ease;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        .clear-button:hover {
+            background-color: #11db68;
+        }
+        .clear-button:active {
+            background-color: #ff6b6b;
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+        #sound-select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #sound-select:hover {
+            border-color: #398be5;
+        }
+        .language-icons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .language-icons img {
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+            cursor: pointer;
+            border-bottom: outset; color:gold;
+            border-radius: 10%;
+            transition: border-color 0.3s ease;
+        }
+        .language-icons img:hover {
+            border-color: #398be5;
+        }
+        @media (max-width: 600px) {
+            .content {
+                width: 100%;
+            }
+            .timer-input {
+                width: calc(100% - 22px);
+            }
+            .timer-button {
+                width: 100%;
+                margin: 5px 0;
+            }
+            .sound-icon {
+                width: 25px;
+                height: 25px;
+            }
+            .language-icons img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="language-icons">
+            <a href="index.html"><img src="assets/flags/br.svg" alt="PORTUGUESE"></a>
+            <a href="index_es.html"><img src="assets/flags/es.svg" alt="SPANISH"></a>
+            <a href="index_en.html"><img src="assets/flags/us.svg" alt="ENGLISH"></a>
+        </div>
+        <h1>COUNTDOWN TIMER + ALARM TIMER PRO 3000</h1>
+        <div class="timer-container">
+            <div id="countdown" class="timer">00:00:00</div>
+            <div>
+                <input id="hours" class="timer-input" type="number" min="0" placeholder="Hours">
+                <input id="minutes" class="timer-input" type="number" min="0" placeholder="Minutes">
+                <input id="seconds" class="timer-input" type="number" min="0" placeholder="Seconds">
+            </div>
+            <button class="clear-button" onclick="clearInputs()">CLEAR FIELDS</button>
+            <div>
+                <button class="timer-button" onclick="startCountdown()">Start</button>
+                <button class="timer-button" onclick="pauseCountdown()">Pause</button>
+                <button class="timer-button" onclick="resetCountdown()">Reset</button>
+            </div>
+            <div class="sound-control">
+                <label for="sound-select">MUSIC TONE:</label>
+                <select id="sound-select" onchange="playSelectedSound()">
+                    <option value="">SELECT</option>
+                    <option value="assets/songs/pager_alarm.wav">PAGER ALARM</option>
+                    <option value="assets/songs/Old_Phone_Rings.wav">OLD PHONE RINGS</option>
+                    <option value="assets/songs/Boxing_bell_ring_two_times.wav">BOXING BELL</option>
+                    <option value="assets/songs/740423__anthonyrox__message-notification-4.wav">NOTIFICATION</option>
+                    <option value="assets/songs/564246__rokzroom__synth-pop-loop-01.wav">RANDOM MUSIC</option>
+                    <option value="assets/songs/727987__nevak36__airport.mp3">AIRPORT</option>
+                    <option value="assets/songs/cargando_arma-notification_sound-1640500.mp3">RELOADING GUN</option>
+                    <option value="assets/songs/36791-12107801_navio.wav">SHIP HORN (WAKE UP)</option>
+                    <option value="assets/songs/VIDRO.mp3">BREAKING THINGS (WAKE UP/SCARE)</option>
+                </select>
+                <label for="repeat-sound">REPEAT:</label>
+                <input id="repeat-sound" type="checkbox">
+                <img id="sound-icon" class="sound-icon sound-enabled" src="assets/others/volume.png" alt="Sound Enabled" onclick="toggleSound()">
+            </div>
+        </div>
+    </div>
+		    <script>
+        let countdownInterval;
+        let countdownSeconds = 0;
+        let isCountdownRunning = false;
+        let isSoundEnabled = true; // Mudança aqui
+        let audio;
+
+        function startCountdown() {
+            if (isCountdownRunning) return;
+
+            const hours = parseInt(document.getElementById('hours').value) || 0;
+            const minutes = parseInt(document.getElementById('minutes').value) || 0;
+            const seconds = parseInt(document.getElementById('seconds').value) || 0;
+
+            countdownSeconds = hours * 3600 + minutes * 60 + seconds;
+
+            if (countdownSeconds <= 0) {
+                alert('Please enter a valid time.');
+                return;
+            }
+
+            isCountdownRunning = true;
+            countdownInterval = setInterval(() => {
+                countdownSeconds--;
+                displayCountdown(countdownSeconds);
+
+                if (countdownSeconds <= 0) {
+                    clearInterval(countdownInterval);
+                    playAlarm();
+                }
+            }, 1000);
+        }
+
+        function pauseCountdown() {
+            clearInterval(countdownInterval);
+            stopSound();
+            isCountdownRunning = false;
+        }
+
+        function resetCountdown() {
+            clearInterval(countdownInterval);
+            stopSound();
+            isCountdownRunning = false;
+            countdownSeconds = 0;
+            displayCountdown(countdownSeconds);
+        }
+
+        function displayCountdown(seconds) {
+            const hours = String(Math.floor(seconds / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+            const remainingSeconds = String(seconds % 60).padStart(2, '0');
+            const countdownTime = `${hours}:${minutes}:${remainingSeconds}`;
+            document.getElementById('countdown').textContent = countdownTime;
+            document.title = countdownTime; // Atualizar o título da página com o countdown
+        }
+
+        function toggleSound() {
+            const soundIcon = document.getElementById('sound-icon');
+            isSoundEnabled = !isSoundEnabled;
+            if (isSoundEnabled) {
+                soundIcon.classList.remove('sound-disabled');
+                soundIcon.classList.add('sound-enabled');
+                soundIcon.src = 'assets/others/volume.png';
+            } else {
+                soundIcon.classList.remove('sound-enabled');
+                soundIcon.classList.add('sound-disabled');
+                soundIcon.src = 'assets/others/mute.png';
+                stopSound();
+            }
+        }
+
+        function playAlarm() {
+            stopSound(); // Parar qualquer som anterior antes de tocar o alarme
+            const selectedSound = document.getElementById('sound-select').value;
+            audio = new Audio(selectedSound);
+            audio.loop = document.getElementById('repeat-sound').checked; // Repetir o som continuamente se o checkbox estiver marcado
+            audio.play();
+        }
+
+        function playSelectedSound() {
+            stopSound(); // Parar qualquer som anterior antes de tocar o novo som
+            if (!isSoundEnabled) return;
+            const selectedSound = document.getElementById('sound-select').value;
+            audio = new Audio(selectedSound);
+            audio.play();
+        }
+
+        function stopSound() {
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0; // Reiniciar o som para o início
+            }
+        }
+
+        function clearInputs() {
+            document.getElementById('hours').value = '';
+            document.getElementById('minutes').value = '';
+            document.getElementById('seconds').value = '';
+        }
+    </script>
+</body>
+</html>
