@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: url('/assets/chefe3000.webp') no-repeat center center / cover;
+            background: url('assets/chefe3000.webp') no-repeat center center / cover;
             margin: 0;
             padding: 0;
             display: flex;
@@ -172,9 +172,9 @@
 <body>
     <div class="content">
         <div class="language-icons">
-            <a href="index.html"><img src="/assets/flags/br.svg" alt="PORTUGUESE"></a>
-            <a href="index_es.html"><img src="/assets/flags/es.svg" alt="SPANISH"></a>
-            <a href="index_en.html"><img src="/assets/flags/us.svg" alt="ENGLISH"></a>
+            <a href="index.html"><img src="assets/flags/br.svg" alt="PORTUGUESE"></a>
+            <a href="index_es.html"><img src="assets/flags/es.svg" alt="SPANISH"></a>
+            <a href="index_en.html"><img src="assets/flags/us.svg" alt="ENGLISH"></a>
         </div>
         <h1>TIMER PRO 3000</h1>
         <div class="timer-container">
@@ -194,19 +194,19 @@
                 <label for="sound-select">TOQUE MUSICAL:</label>
                 <select id="sound-select" onchange="playSelectedSound()">
                     <option value="">SELECIONE</option>
-                    <option value="/assets/songs/songs/urna_eletronica.wav">URNA ELETRONICA</option>
-<option value="/assets/songs/Old_Phone_Rings.wav">TELEFONE ANTIGO</option>
-<option value="/assets/songs/Boxing_bell_ring_two_times.wav">SINO DE LUTA (GONGO)</option>
-<option value="/assets/songs/740423__anthonyrox__message-notification-4.wav">NOTIFICAÇÃO</option>
-<option value="/assets/songs/564246__rokzroom__synth-pop-loop-01.wav">MÚSICA ALEATORIA</option>
-<option value="/assets/songs/727987__nevak36__airport.mp3">AEROPORTO</option>
-<option value="/assets/songs/cargando_arma-notification_sound-1640500.mp3">ARMA RECARREGANDO</option>
-<option value="/assets/songs/buzinadenavio.mp3">BUZINA DE NAVIO (PARA ACORDAR)</option>
-<option value="/assets/songs/VIDRO.mp3">COISAS QUEBRANDO (PARA ACORDAR/SUSTO)</option>
+                    <option value="assets/songs/songs/urna_eletronica.wav">URNA ELETRONICA</option>
+<option value="assets/songs/Old_Phone_Rings.wav">TELEFONE ANTIGO</option>
+<option value="assets/songs/Boxing_bell_ring_two_times.wav">SINO DE LUTA (GONGO)</option>
+<option value="assets/songs/740423__anthonyrox__message-notification-4.wav">NOTIFICAÇÃO</option>
+<option value="assets/songs/564246__rokzroom__synth-pop-loop-01.wav">MÚSICA ALEATORIA</option>
+<option value="assets/songs/727987__nevak36__airport.mp3">AEROPORTO</option>
+<option value="assets/songs/cargando_arma-notification_sound-1640500.mp3">ARMA RECARREGANDO</option>
+<option value="assets/songs/buzinadenavio.mp3">BUZINA DE NAVIO (PARA ACORDAR)</option>
+<option value="assets/songs/VIDRO.mp3">COISAS QUEBRANDO (PARA ACORDAR/SUSTO)</option>
 </select>
 <label for="repeat-sound">REPETIR:</label>
 <input id="repeat-sound" type="checkbox">
-<img id="sound-icon" class="sound-icon sound-enabled" src="/assets/others/volume.png" alt="Som Ativado" onclick="toggleSound()">
+<img id="sound-icon" class="sound-icon sound-enabled" src="assets/others/volume.png" alt="Som Ativado" onclick="toggleSound()">
 </div>
 </div>
 </div>
@@ -273,11 +273,11 @@
             if (isSoundEnabled) {
                 soundIcon.classList.remove('sound-disabled');
                 soundIcon.classList.add('sound-enabled');
-                soundIcon.src = '/assets/others/volume.png';
+                soundIcon.src = 'assets/others/volume.png';
             } else {
                 soundIcon.classList.remove('sound-enabled');
                 soundIcon.classList.add('sound-disabled');
-                soundIcon.src = '/assets/others/mute.png';
+                soundIcon.src = 'assets/others/mute.png';
                 stopSound();
             }
         }
